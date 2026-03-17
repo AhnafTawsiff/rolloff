@@ -1,12 +1,9 @@
 <script>
-  import "../app.css";
-  import Header from "$lib/components/layout/Header.svelte";
+  import Header from '$lib/components/layout/Header.svelte';
+  import Footer from '$lib/components/layout/Footer.svelte';
+  import '../app.css';
 </script>
-
+ 
 <Header />
-
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
-
-<button class="btn btn-primary">Test DaisyUI Button</button>
+<slot />
+<Footer />
