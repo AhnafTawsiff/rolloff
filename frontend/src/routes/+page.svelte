@@ -1,7 +1,9 @@
 <script>
   import "../app.css";
+  import Header from "$lib/components/layout/Header.svelte";
 </script>
 
+<Header />
 
 <h1>Welcome to your library project</h1>
 <p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
