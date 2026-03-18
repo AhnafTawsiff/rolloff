@@ -258,8 +258,8 @@
   .drawer.open .nav-list li { opacity: 1; transform: none; }
   .nav-list a {
     display: block; padding: 17px 0;
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(20px, 3vw, 28px); font-weight: 300;
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(20px, 1.5vw, 28px); font-weight: 300;
     letter-spacing: 0.03em; color: #000; text-decoration: none;
     position: relative; transition: letter-spacing 300ms var(--ease), color 200ms;
   }
