@@ -122,7 +122,7 @@
       </label>
 
       <!-- Copyright — year auto-updates, just change the brand name -->
-      <p>© {new Date().getFullYear()} THAMINAS. All rights reserved.</p>
+      <p>© {new Date().getFullYear()} Thaminas. All rights reserved.</p>
 
     </div>
 
@@ -227,7 +227,7 @@
     transition: color 180ms;
   }
   a:hover { color: #fff; }                    /* ← LINK HOVER COLOR */
-  footer.hc a { color: rgba(0,0,0,0.75); }    /* ← LINK COLOR in high contrast */
+  footer.hc a { color: rgba(0,0,0,0.5); }    /* ← LINK COLOR in high contrast */
   footer.hc a:hover { color: #000; }          /* ← LINK HOVER COLOR in high contrast */
 
   /* ── BOTTOM BAR ───────────────────────────────────────────
@@ -254,7 +254,7 @@
     color: rgba(255,255,255,0.55);          /* ← TOGGLE LABEL COLOR */
     transition: color 200ms;
   }
-  footer.hc label { color: rgba(0,0,0,0.75); } /* ← TOGGLE LABEL in high contrast */
+  footer.hc label { color: rgba(0,0,0,0.55); } /* ← TOGGLE LABEL in high contrast */
 
   /* ── TOGGLE PILL SWITCH ───────────────────────────────────
      The actual sliding toggle control.
@@ -321,6 +321,6 @@
     margin: 0;
     transition: color 200ms;
   }
-  footer.hc p { color: rgba(0,0,0,0.75); } /* ← COPYRIGHT in high contrast */
+  footer.hc p { color: rgba(0,0,0,0.28); } /* ← COPYRIGHT in high contrast */
 
 </style>
