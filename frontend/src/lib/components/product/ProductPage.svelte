@@ -10,6 +10,7 @@
     product — one product object from src/lib/data/products.js
 ============================================================ -->
 <script>
+  import { addToCart } from '$lib/stores/cart.js';
   let { product } = $props();
 
   // ── State ──────────────────────────────────────────────────
@@ -31,9 +32,10 @@
     openAccordion = openAccordion === i ? null : i;
   }
 
-  // Add to cart feedback
+  // Add to cart — adds item to store and opens drawer
   function handleAddToCart() {
     if (product.sizes.length > 0 && !selectedSize) return;
+    addToCart(product, selectedSize);
     addedToCart = true;
     setTimeout(() => (addedToCart = false), 2000);
   }

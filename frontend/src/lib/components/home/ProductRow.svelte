@@ -30,9 +30,10 @@
     padding: 0 clamp(16px,3vw,48px); margin-bottom: clamp(24px,3vw,40px);
   }
   .row-heading {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(22px,3vw,36px); font-weight: 300;
-    letter-spacing: 0.06em; color: #fff; margin: 0;
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(18px, 2.5vw, 30px); font-weight: 200;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #fff; margin: 0;
   }
   .row-all {
     font-family: 'Jost', sans-serif; font-size: 10.5px; font-weight: 300;
@@ -68,6 +69,7 @@
     position: absolute; inset: 0; background: rgba(0,0,0,0.3);
     display: flex; align-items: flex-end; justify-content: center;
     padding-bottom: 20px; opacity: 0; transition: opacity 280ms;
+    pointer-events: none;
   }
   .card:hover .card-overlay { opacity: 1; }
   .card-cta {
@@ -78,7 +80,7 @@
   .card-info { padding: 12px 0 0; display: flex; flex-direction: column; gap: 4px; }
   .card-name {
     font-family: 'Jost', sans-serif; font-size: clamp(11px,1vw,13px);
-    font-weight: 300; letter-spacing: 0.06em; color: #fff; margin: 0;
+    font-weight: 300; letter-spacing: 0.08em; color: #fff; margin: 0;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .card-price {

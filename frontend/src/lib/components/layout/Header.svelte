@@ -1,5 +1,6 @@
 <script>
   import { Search, ShoppingBag, User, X } from 'lucide-svelte';
+  import { cartOpen, cartCount } from '$lib/stores/cart.js';
 
   let menuOpen = $state(false);
   let searchOpen = $state(false);
@@ -24,7 +25,7 @@
     { label: 'Fragrances and Makeup', href: '/beauty' },
     { label: 'Décor & Lifestyle', href: '/lifestyle' },
     { label: 'Gifts',            href: '/gifts' },
-    { label: 'THAMINAS Services',   href: '/services' },
+    { label: 'Gucci Services',   href: '/services' },
   ];
 
   const utils = [
@@ -61,10 +62,16 @@
         <User size={18} strokeWidth={1.2} />
       </a>
 
-      <a href="/cart" class="icon-btn bag" aria-label="Shopping bag">
+      <button
+        class="icon-btn bag"
+        aria-label="Shopping bag"
+        onclick={() => cartOpen.set(true)}
+      >
         <ShoppingBag size={18} strokeWidth={1.2} />
-        <span class="badge">0</span>
-      </a>
+        {#if $cartCount > 0}
+          <span class="badge">{$cartCount}</span>
+        {/if}
+      </button>
 
       <button
         class="util-btn"
@@ -164,7 +171,7 @@
 
   /* ── Logo ── */
   .logo {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Cormorant Garamond', Georgia, serif; /* logo only */
     font-size: clamp(17px, 2.2vw, 22px); font-weight: 300;
     letter-spacing: 0.45em; color: #fff; text-decoration: none;
     user-select: none; white-space: nowrap; transition: opacity 300ms;
@@ -258,8 +265,8 @@
   .drawer.open .nav-list li { opacity: 1; transform: none; }
   .nav-list a {
     display: block; padding: 17px 0;
-    font-family: 'Jost', sans-serif;
-    font-size: clamp(20px, 1.5vw, 28px); font-weight: 300;
+    font-family: 'Cormorant Garamond', Georgia, serif; /* logo only */
+    font-size: clamp(20px, 3vw, 28px); font-weight: 300;
     letter-spacing: 0.03em; color: #000; text-decoration: none;
     position: relative; transition: letter-spacing 300ms var(--ease), color 200ms;
   }
