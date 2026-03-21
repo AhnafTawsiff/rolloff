@@ -69,13 +69,21 @@
     loading = true;
     await new Promise(r => setTimeout(r, 400)); // consistent timing
 
-    const result = register({ firstName, lastName, email, password });
+    const result = await register({ firstName, lastName, email, password });
 
     if (result.ok) {
       // Clear sensitive data immediately
       password = '';
       confirm  = '';
-      goto('/account');
+      if (result.needsConfirmation) {
+        banner = '';
+        // Show a success message instead of redirecting
+        errors = {};
+        alert('Account created! Please check your email to confirm your account before logging in.');
+        goto('/account/login');
+      } else {
+        goto('/account');
+      }
     } else {
       banner = result.error;
     }

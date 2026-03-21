@@ -3,20 +3,23 @@
   // src/routes/checkout/+page.svelte
   // ──────────────────────────────────────────────────────────────────────────
   import { cartItems, cartTotal, clearCart } from '$lib/stores/cart.js';
+  import { saveOrder } from '$lib/stores/auth.js';
 
-  let step      = $state(1);
-  let firstName = $state('');
-  let lastName  = $state('');
-  let email     = $state('');
-  let phone     = $state('');
-  let address1  = $state('');
-  let address2  = $state('');
-  let city      = $state('');
-  let district  = $state('');
-  let division  = $state('');
-  let postcode  = $state('');
-  let notes     = $state('');
-  let errors    = $state({});
+  let step        = $state(1);
+  let firstName   = $state('');
+  let lastName    = $state('');
+  let email       = $state('');
+  let phone       = $state('');
+  let address1    = $state('');
+  let address2    = $state('');
+  let city        = $state('');
+  let district    = $state('');
+  let division    = $state('');
+  let postcode    = $state('');
+  let notes       = $state('');
+  let errors      = $state({});
+  let orderError  = $state('');
+  let placing     = $state(false);
 
   const DIVISIONS = ['Dhaka','Chittagong','Rajshahi','Khulna','Barishal','Sylhet','Rangpur','Mymensingh'];
   const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
@@ -38,7 +41,39 @@
   }
 
   function submitShipping() { if (validate()) step = 2; }
-  function placeOrder()     { clearCart(); window.location.href = '/order-confirmed'; }
+
+  async function placeOrder() {
+    if (placing) return;
+    placing    = true;
+    orderError = '';
+
+    // Build the full address string
+    const fullAddress = [
+      address1,
+      address2,
+      city,
+      district,
+      division,
+      postcode,
+    ].filter(Boolean).join(', ');
+
+    const result = await saveOrder({
+      items:   $cartItems,
+      total:   $cartTotal,
+      address: fullAddress,
+      notes,
+      email,
+      phone,
+    });
+
+    if (result.ok) {
+      clearCart();
+      window.location.href = '/order-confirmed';
+    } else {
+      orderError = result.error || 'Something went wrong. Please try again.';
+      placing = false;
+    }
+  }
 
   const subtotal = $derived($cartTotal);
   const fmt = (n) => '৳ ' + n.toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -201,9 +236,17 @@
         Our team will contact you at <strong>{phone}</strong> to confirm.
       </p>
 
+      {#if orderError}
+      <div class="cod-notice" style="border-left-color: #c00; color: #c00; background: #fff5f5;">
+        {orderError}
+      </div>
+      {/if}
+
       <div class="confirm-actions">
-        <button class="back-btn" onclick={() => step = 1}>← Back</button>
-        <button class="cta" onclick={placeOrder}>PLACE ORDER</button>
+        <button class="back-btn" onclick={() => step = 1} disabled={placing}>← Back</button>
+        <button class="cta" onclick={placeOrder} disabled={placing}>
+          {#if placing}PLACING ORDER...{:else}PLACE ORDER{/if}
+        </button>
       </div>
     </div>
     {/if}

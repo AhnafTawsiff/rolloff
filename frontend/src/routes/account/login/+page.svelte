@@ -43,7 +43,7 @@
     // Small artificial delay — prevents timing attacks revealing valid emails
     await new Promise(r => setTimeout(r, 400));
 
-    const result = login({ email, password });
+    const result = await login({ email, password });
 
     if (result.ok) {
       // Clear sensitive data from memory immediately
